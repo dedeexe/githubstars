@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RepositoriesViewController.swift
 //  GitHubRating
 //
 //  Created by Fabricio Santos on 15/01/19.
@@ -8,13 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class RepositoriesViewController : BaseViewController<RepositoryView> {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-
+    
 }
-
