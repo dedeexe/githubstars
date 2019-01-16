@@ -13,9 +13,10 @@ protocol RepositoriesViewDelegate {
 }
 
 class RepositoriesView: UIView {
-
+    
     private lazy var tableView : RepositoriesTableView = {
         let view = RepositoriesTableView()
+        view.eventDelegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -55,4 +56,10 @@ class RepositoriesView: UIView {
         backgroundColor = UIColor.white
     }
     
+}
+
+extension RepositoriesView : RepositoriesTableViewEventDelegate {
+    func repositoriesTableViewDidReachEndOfList(_ tableView: RepositoriesTableView) {
+        print("Reach the end")
+    }
 }

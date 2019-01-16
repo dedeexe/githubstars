@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol RepositoriesTableViewEventDelegate : class {
+    func repositoriesTableViewDidReachEndOfList(_ tableView:RepositoriesTableView)
+}
+
 class RepositoriesTableView : UITableView {
+    
+    weak var eventDelegate : RepositoriesTableViewEventDelegate?
     
     var repositories : [Repository] = [] {
         didSet { self.update() }
@@ -70,5 +76,12 @@ extension RepositoriesTableView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let offset = 3
+        if indexPath.row == repositories.count - offset {
+            eventDelegate?.repositoriesTableViewDidReachEndOfList(self)
+        }
     }
 }
