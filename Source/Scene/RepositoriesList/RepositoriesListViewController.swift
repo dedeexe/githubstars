@@ -12,18 +12,13 @@ protocol RepositoriesViewControllerDelegate : class {
     func requestNewRepositories()
 }
 
-class RepositoriesViewController : BaseViewController<RepositoriesView> {
+class RepositoriesListViewController : BaseViewController<RepositoriesListView> {
     
     weak var delegate : RepositoriesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
         internalView.update(repositories: StubRep().createRepositories(quantity: 10))
-    }
-    
-    func setup() {
-        title = "Repositories"
     }
     
 }

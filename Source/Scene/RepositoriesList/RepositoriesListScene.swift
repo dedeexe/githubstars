@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RepositoriesScene {
+class RepositoriesListScene {
     
-    static func create() -> RepositoriesViewController {
-        let view = RepositoriesView()
-        let controller = RepositoriesViewController(using: view)
+    static func create() -> RepositoriesListViewController {
+        let view = RepositoriesListView()
+        let controller = RepositoriesListViewController(using: view)
         return controller
     }
     

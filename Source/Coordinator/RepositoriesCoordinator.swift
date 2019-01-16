@@ -8,15 +8,16 @@
 
 import UIKit
 
-class RepositoriesCoordinator : BaseCoordinator<RepositoriesViewController> {
+class RepositoriesCoordinator : BaseCoordinator<RepositoriesListViewController> {
     
     init(navigationController : UINavigationController?) {
-        let viewController = RepositoriesScene.create()
+        let viewController = RepositoriesListScene.create()
         super.init(navigationController: navigationController, viewController: viewController)
         viewController.delegate = self
     }
     
     override func start() {
+        viewController.title = "Repositories"
         navigationController?.pushViewController(viewController, animated: true)
     }
     

@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol RepositoriesViewDelegate {
-    func respositoriesViewDidRequestMoreItens(_ view:RepositoriesView)
+protocol RepositoriesListViewDelegate {
+    func respositoriesViewDidRequestMoreItens(_ view:RepositoriesListView)
 }
 
-class RepositoriesView: UIView {
+class RepositoriesListView: UIView {
     
     private lazy var tableView : RepositoriesTableView = {
         let view = RepositoriesTableView()
@@ -58,7 +58,7 @@ class RepositoriesView: UIView {
     
 }
 
-extension RepositoriesView : RepositoriesTableViewEventDelegate {
+extension RepositoriesListView : RepositoriesTableViewEventDelegate {
     func repositoriesTableViewDidReachEndOfList(_ tableView: RepositoriesTableView) {
         print("Reach the end")
     }
