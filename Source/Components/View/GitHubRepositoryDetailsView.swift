@@ -26,6 +26,14 @@ class GitHubRepositoryDetailsView: UIView {
         return label
     }()
 
+    lazy var descriptionLabel : UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var ratingLabel : UILabel = {
         let label = UILabel()
         label.text = ""
@@ -52,6 +60,7 @@ class GitHubRepositoryDetailsView: UIView {
     func buildComponents() {
         addSubview(titleLabel)
         addSubview(authorLabel)
+        addSubview(descriptionLabel)
         addSubview(ratingLabel)
     }
     
@@ -65,9 +74,13 @@ class GitHubRepositoryDetailsView: UIView {
         authorLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: 0).isActive = true
         authorLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 0).isActive = true
 
-        ratingLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 8).isActive = true
-        ratingLabel.leftAnchor.constraint(equalTo: authorLabel.leftAnchor, constant: 0).isActive = true
-        ratingLabel.rightAnchor.constraint(equalTo: authorLabel.rightAnchor, constant: 0).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.leftAnchor.constraint(equalTo: authorLabel.leftAnchor, constant: 0).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: authorLabel.rightAnchor, constant: 0).isActive = true
+        
+        ratingLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
+        ratingLabel.leftAnchor.constraint(equalTo: descriptionLabel.leftAnchor, constant: 0).isActive = true
+        ratingLabel.rightAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 0).isActive = true
         ratingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
 
     }

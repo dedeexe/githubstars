@@ -12,6 +12,7 @@ struct Repository {
     
     var name : String?
     var owner : Owner?
+    var description : String?
     var stargazers_count : Int?
     
 }

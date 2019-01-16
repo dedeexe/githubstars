@@ -10,9 +10,22 @@ import UIKit
 
 class GitHubRepositoryView: UIView {
     
-    var title : String = ""
-    var author : String = ""
-    var stars : Int = 0
+    var title : String = "" {
+        didSet { detailView.titleLabel.text = title }
+    }
+    
+    var author : String = "" {
+        didSet { detailView.authorLabel.text = author }
+    }
+    
+    var stars : Int = 0 {
+        didSet { detailView.ratingLabel.text = String(stars) }
+    }
+    
+    var descriptionText : String = "" {
+        didSet { detailView.descriptionLabel.text = descriptionText }
+    }
+    
     
     private lazy var detailView : GitHubRepositoryDetailsView = {
         let view = GitHubRepositoryDetailsView()
@@ -44,12 +57,6 @@ class GitHubRepositoryView: UIView {
         detailView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         detailView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         detailView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-    }
-    
-    func update() {
-        detailView.titleLabel.text = title
-        detailView.authorLabel.text = author
-        detailView.ratingLabel.text = String(stars)
     }
     
 }

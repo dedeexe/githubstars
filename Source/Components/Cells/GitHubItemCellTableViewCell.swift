@@ -37,8 +37,6 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func build() {
@@ -63,7 +61,7 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
         repositoryView.title = repository?.name ?? ""
         repositoryView.author = repository?.owner?.login ?? ""
         repositoryView.stars = repository?.stargazers_count ?? 0
-        repositoryView.update()
+        repositoryView.descriptionText = repository?.description ?? ""
     }
 
 }

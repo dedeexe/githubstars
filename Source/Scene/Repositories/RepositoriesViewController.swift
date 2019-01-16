@@ -26,6 +26,8 @@ class StubRep {
     
     func createRandomRepository() -> Repository {
         let value = arc4random_uniform(UInt32.max)
+        let stars = Int(arc4random_uniform(UInt32(UInt16.max)))
+        let cycle = Int(arc4random_uniform(30))
         
         var o = Owner()
         o.id = Int(value)
@@ -34,6 +36,8 @@ class StubRep {
         var r = Repository()
         r.name = "Repository \(value)"
         r.owner = o
+        r.stargazers_count = stars
+        r.description = String(repeating: "enjwk qe erewq ", count: cycle)
         
         return r
     }
