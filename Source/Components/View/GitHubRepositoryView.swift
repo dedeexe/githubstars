@@ -10,9 +10,9 @@ import UIKit
 
 class GitHubRepositoryView: UIView {
     
-    var title : String?
-    var author : String?
-    var rating : Int?
+    var title : String = ""
+    var author : String = ""
+    var stars : Int = 0
     
     private lazy var detailView : GitHubRepositoryDetailsView = {
         let view = GitHubRepositoryDetailsView()
@@ -49,7 +49,7 @@ class GitHubRepositoryView: UIView {
     func update() {
         detailView.titleLabel.text = title
         detailView.authorLabel.text = author
-        detailView.ratingLabel.text = "9"
+        detailView.ratingLabel.text = String(stars)
     }
     
 }

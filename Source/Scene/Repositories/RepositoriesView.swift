@@ -14,8 +14,8 @@ protocol RepositoriesViewDelegate {
 
 class RepositoriesView: UIView {
 
-    private lazy var tableView : RepositoryTableView = {
-        let view = RepositoryTableView()
+    private lazy var tableView : RepositoriesTableView = {
+        let view = RepositoriesTableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

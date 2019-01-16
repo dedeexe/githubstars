@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepositoryTableView : UITableView {
+class RepositoriesTableView : UITableView {
     
     var repositories : [Repository] = [] {
         didSet { self.update() }
@@ -42,7 +42,7 @@ class RepositoryTableView : UITableView {
     
 }
 
-extension RepositoryTableView : UITableViewDataSource {
+extension RepositoriesTableView : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -63,7 +63,7 @@ extension RepositoryTableView : UITableViewDataSource {
     
 }
 
-extension RepositoryTableView : UITableViewDelegate {
+extension RepositoriesTableView : UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

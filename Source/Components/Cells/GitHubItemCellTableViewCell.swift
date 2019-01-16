@@ -10,7 +10,6 @@ import UIKit
 
 class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     
-    
     private lazy var repositoryView : GitHubRepositoryView = {
         let view = GitHubRepositoryView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -61,8 +60,9 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     }
     
     private func update(repository : Repository?) {
-        repositoryView.title = repository?.name
-        repositoryView.author = repository?.owner?.login
+        repositoryView.title = repository?.name ?? ""
+        repositoryView.author = repository?.owner?.login ?? ""
+        repositoryView.stars = repository?.stargazers_count ?? 0
         repositoryView.update()
     }
 

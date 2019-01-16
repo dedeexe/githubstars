@@ -12,5 +12,6 @@ struct Repository {
     
     var name : String?
     var owner : Owner?
+    var stargazers_count : Int?
     
 }
