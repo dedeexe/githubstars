@@ -36,23 +36,26 @@ class GitHubRepositoryDetailsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initComponents()
-        setup()
+        build()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initComponents()
-        setup()
+        build()
     }
     
-    func initComponents() {
+    func build() {
+        buildComponents()
+        buildConstraints()
+    }
+    
+    func buildComponents() {
         addSubview(titleLabel)
         addSubview(authorLabel)
         addSubview(ratingLabel)
     }
     
-    func setup() {
+    func buildConstraints() {
         
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
@@ -65,7 +68,7 @@ class GitHubRepositoryDetailsView: UIView {
         ratingLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 8).isActive = true
         ratingLabel.leftAnchor.constraint(equalTo: authorLabel.leftAnchor, constant: 0).isActive = true
         ratingLabel.rightAnchor.constraint(equalTo: authorLabel.rightAnchor, constant: 0).isActive = true
-        ratingLabel.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: authorLabel.bottomAnchor, multiplier: 8)
+        ratingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
 
     }
     

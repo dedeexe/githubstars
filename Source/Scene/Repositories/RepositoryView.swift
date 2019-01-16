@@ -26,27 +26,33 @@ class RepositoryView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame:frame)
-        initComponents()
-        setup()
+        build()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initComponents()
+        build()
+    }
+    
+    func build() {
+        buildComponents()
+        buildConstraints()
         setup()
     }
     
-    private func initComponents() {
+    func buildComponents() {
         addSubview(tableView)
     }
     
-    private func setup() {
-        backgroundColor = UIColor.white
-        
+    func buildConstraints() {
         tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    private func setup() {
+        backgroundColor = UIColor.white
     }
     
 }

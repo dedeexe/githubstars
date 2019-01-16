@@ -27,6 +27,10 @@ class RepositoryTableView : UITableView {
     private func initialize() {
         dataSource = self
         delegate = self
+        
+        rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = UITableView.automaticDimension
+        
         register(GitHubItemCellTableViewCell.self, forCellReuseIdentifier: GitHubItemCellTableViewCell.identifier)
     }
     

@@ -19,8 +19,7 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initComponents()
-        setup()
+        build()
     }
     
     var repository : Repository? = nil {
@@ -29,14 +28,12 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initComponents()
-        setup()
+        build()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        initComponents()
-        setup()
+        build()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,11 +42,16 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
         // Configure the view for the selected state
     }
     
-    private func initComponents() {
+    func build() {
+        buildComponents()
+        buildConstraints()
+    }
+    
+    func buildComponents() {
         contentView.addSubview(repositoryView)
     }
     
-    private func setup() {
+    func buildConstraints() {
         selectionStyle = .none
         
         repositoryView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
