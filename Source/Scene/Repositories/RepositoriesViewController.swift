@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol RepositoriesViewControllerDelegate : class {
+    func requestNewRepositories()
+}
+
 class RepositoriesViewController : BaseViewController<RepositoriesView> {
+    
+    weak var delegate : RepositoriesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
