@@ -1,5 +1,5 @@
 //
-//  Gettable.swift
+//  AppConfig.swift
 //  GitHubRating
 //
 //  Created by Fabricio Santos on 16/01/19.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-protocol ServiceGettable {
+struct AppConfig {
     
-    associatedtype GettableResult
-    func get(completion:((GettableResult) -> Void)?)
+    static let endpoint = "https://api.github.com/"
     
 }

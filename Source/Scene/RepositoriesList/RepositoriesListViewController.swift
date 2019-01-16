@@ -15,37 +15,39 @@ protocol RepositoriesViewControllerDelegate : class {
 class RepositoriesListViewController : BaseViewController<RepositoriesListView> {
     
     weak var delegate : RepositoriesViewControllerDelegate?
+    private let service : GithubRepositoriesService
+    
+    private var repositories : [Repository] = []
+    
+    init(using view: RepositoriesListView, service:GithubRepositoriesService) {
+        self.service = service
+        super.init(using: view)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        internalView.update(repositories: StubRep().createRepositories(quantity: 10))
+        getRepositories()
     }
     
-}
-
-class StubRep {
-    
-    func createRandomRepository() -> Repository {
-        let value = arc4random_uniform(UInt32.max)
-        let stars = Int(arc4random_uniform(UInt32(UInt16.max)))
-        let cycle = Int(arc4random_uniform(30))
-        
-        var o = Owner()
-        o.id = Int(value)
-        o.login = "Owner \(value)"
-        
-        var r = Repository()
-        r.name = "Repository \(value)"
-        r.owner = o
-        r.stargazers_count = stars
-        r.description = String(repeating: "enjwk qe erewq ", count: cycle)
-        
-        return r
+    func show(repositories:[Repository]) {
+        self.repositories.append(contentsOf: repositories)
+        internalView.update(repositories: repositories)
     }
     
-    func createRepositories(quantity:Int) -> [Repository] {
-        let reps = (0..<quantity).map { _ in createRandomRepository() }
-        return reps
+    func getRepositories() {
+        service.get { [weak self] (result) in
+            switch result {
+            case .success(let repositories):
+                self?.repositories.append(contentsOf: repositories)
+                self?.internalView.update(repositories: self?.repositories ?? [])
+            default:
+                break
+            }
+        }
     }
     
 }

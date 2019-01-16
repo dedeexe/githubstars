@@ -12,7 +12,8 @@ class RepositoriesListScene {
     
     static func create() -> RepositoriesListViewController {
         let view = RepositoriesListView()
-        let controller = RepositoriesListViewController(using: view)
+        let service = GithubRepositoriesService()
+        let controller = RepositoriesListViewController(using: view, service: service)
         return controller
     }
     

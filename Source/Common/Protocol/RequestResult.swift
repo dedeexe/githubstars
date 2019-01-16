@@ -1,5 +1,5 @@
 //
-//  Gettable.swift
+//  RequestResult.swift
 //  GitHubRating
 //
 //  Created by Fabricio Santos on 16/01/19.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-protocol ServiceGettable {
-    
-    associatedtype GettableResult
-    func get(completion:((GettableResult) -> Void)?)
-    
+enum RequestResult<T> {
+    case success(T)
+    case fail(Error)
 }
