@@ -14,17 +14,15 @@ protocol RepositoryViewDelegate {
 
 class RepositoryView: UIView {
 
-    lazy var tableView : UITableView = {
-        let view = UITableView()
+    private lazy var tableView : RepositoryTableView = {
+        let view = RepositoryTableView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    lazy var detailView : GitHubRepositoryDetailsView = {
-        let view = GitHubRepositoryDetailsView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    
+    func update(repositories:[Repository]) {
+        tableView.repositories = repositories
+    }
     
     override init(frame: CGRect) {
         super.init(frame:frame)

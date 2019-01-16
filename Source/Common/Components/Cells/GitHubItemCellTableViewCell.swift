@@ -8,7 +8,8 @@
 
 import UIKit
 
-class GitHubItemCellTableViewCell: UITableViewCell {
+class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
+    
     
     private lazy var repositoryView : GitHubRepositoryView = {
         let view = GitHubRepositoryView()
@@ -20,6 +21,10 @@ class GitHubItemCellTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initComponents()
         setup()
+    }
+    
+    var repository : Repository? = nil {
+        didSet { update(repository: repository) }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,15 +50,18 @@ class GitHubItemCellTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        selectionStyle = .none
+        
         repositoryView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
         repositoryView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
         repositoryView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0).isActive = true
         repositoryView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
     }
     
-    func update(repository : Repository?) {
+    private func update(repository : Repository?) {
         repositoryView.title = repository?.name
         repositoryView.author = repository?.owner?.login
+        repositoryView.update()
     }
 
 }
