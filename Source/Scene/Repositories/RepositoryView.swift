@@ -8,10 +8,22 @@
 
 import UIKit
 
+protocol RepositoryViewDelegate {
+    func respositoryViewDidRequestMoreItens(_ view:RepositoryView)
+}
+
 class RepositoryView: UIView {
 
     lazy var tableView : UITableView = {
-        return UITableView()
+        let view = UITableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    lazy var detailView : GitHubRepositoryDetailsView = {
+        let view = GitHubRepositoryDetailsView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -31,6 +43,8 @@ class RepositoryView: UIView {
     }
     
     private func setup() {
+        backgroundColor = UIColor.white
+        
         tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
