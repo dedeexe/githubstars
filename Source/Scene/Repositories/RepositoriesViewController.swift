@@ -8,15 +8,19 @@
 
 import UIKit
 
-class RepositoriesViewController : BaseViewController<RepositoryView> {
+class RepositoriesViewController : BaseViewController<RepositoriesView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         internalView.update(repositories: StubRep().createRepositories(quantity: 10))
     }
     
+    func setup() {
+        title = "Repositories"
+    }
+    
 }
-
 
 class StubRep {
     

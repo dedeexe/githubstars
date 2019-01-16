@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol RepositoryViewDelegate {
-    func respositoryViewDidRequestMoreItens(_ view:RepositoryView)
+protocol RepositoriesViewDelegate {
+    func respositoriesViewDidRequestMoreItens(_ view:RepositoriesView)
 }
 
-class RepositoryView: UIView {
+class RepositoriesView: UIView {
 
     private lazy var tableView : RepositoryTableView = {
         let view = RepositoryTableView()
