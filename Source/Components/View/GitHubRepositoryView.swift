@@ -23,7 +23,10 @@ class GitHubRepositoryView: UIView, GitHubRepositoryImageViewDelegate {
     }
     
     var stars : Int = 0 {
-        didSet { detailView.ratingLabel.text = String(stars) }
+        didSet {
+            let text = SpecialChar.star.icon + " " + String(stars)
+            detailView.ratingLabel.text = text
+        }
     }
     
     var descriptionText : String = "" {
@@ -46,6 +49,12 @@ class GitHubRepositoryView: UIView, GitHubRepositoryImageViewDelegate {
         return view
     }()
     
+    private lazy var containerView : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     weak var delegate : GitHubRepositoryViewDelegate?
     
     override init(frame: CGRect) {
@@ -64,22 +73,32 @@ class GitHubRepositoryView: UIView, GitHubRepositoryImageViewDelegate {
     }
     
     func buildComponents() {
-        addSubview(detailView)
-        addSubview(photoView)
+        addSubview(containerView)
+        containerView.addSubview(detailView)
+        containerView.addSubview(photoView)
         photoView.set(image: UIImage(named: "placeholder"))
         photoView.delegate = self
+        
+        containerView.backgroundColor = ColorPallete.Cell.background
+        containerView.layer.cornerRadius = 8.0
+        containerView.layer.masksToBounds = true
     }
     
     func buildConstraints() {
-        photoView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        photoView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        containerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        containerView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        
+        photoView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        photoView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 16).isActive = true
         photoView.rightAnchor.constraint(equalTo: detailView.leftAnchor, constant: -8).isActive = true
-        photoView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 8).isActive = true
+        photoView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -8).isActive = true
         photoView.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
         detailView.topAnchor.constraint(equalTo: photoView.topAnchor, constant: 0).isActive = true
-        detailView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        detailView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0).isActive = true
+        detailView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -16).isActive = true
+        detailView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor, constant: -8).isActive = true
     }
     
     func gitHubRepositoryImageViewDelegate(_ component: GitHubRepositoryImageView, didRequestImageAt address: String) {

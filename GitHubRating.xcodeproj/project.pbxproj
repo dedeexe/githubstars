@@ -18,6 +18,11 @@
 		9118B66421F015AA000381A5 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B66321F015AA000381A5 /* Serializable.swift */; };
 		9118B66621F02FF5000381A5 /* GithubRepositoryImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B66521F02FF4000381A5 /* GithubRepositoryImageView.swift */; };
 		9118B68721F07A6A000381A5 /* ImageDownloaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B68621F07A6A000381A5 /* ImageDownloaderService.swift */; };
+		9118B68E21F09976000381A5 /* ColorPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B68D21F09976000381A5 /* ColorPallete.swift */; };
+		9118B69021F0998D000381A5 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B68F21F0998D000381A5 /* UIColor+extension.swift */; };
+		9118B69221F09BAD000381A5 /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B69121F09BAD000381A5 /* FontStyle.swift */; };
+		9118B69421F09C27000381A5 /* UILabel+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B69321F09C27000381A5 /* UILabel+Style.swift */; };
+		9118B69921F09FAF000381A5 /* SpecialChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118B69821F09FAF000381A5 /* SpecialChar.swift */; };
 		A848E3F721EFAF2B00461644 /* Gettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A848E3F621EFAF2B00461644 /* Gettable.swift */; };
 		A848E3FA21EFB0D400461644 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A848E3F921EFB0D400461644 /* Coordinator.swift */; };
 		A848E3FC21EFB18D00461644 /* RepositoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A848E3FB21EFB18D00461644 /* RepositoriesCoordinator.swift */; };
@@ -57,6 +62,11 @@
 		9118B66321F015AA000381A5 /* Serializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		9118B66521F02FF4000381A5 /* GithubRepositoryImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryImageView.swift; sourceTree = "<group>"; };
 		9118B68621F07A6A000381A5 /* ImageDownloaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderService.swift; sourceTree = "<group>"; };
+		9118B68D21F09976000381A5 /* ColorPallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPallete.swift; sourceTree = "<group>"; };
+		9118B68F21F0998D000381A5 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		9118B69121F09BAD000381A5 /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
+		9118B69321F09C27000381A5 /* UILabel+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Style.swift"; sourceTree = "<group>"; };
+		9118B69821F09FAF000381A5 /* SpecialChar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialChar.swift; sourceTree = "<group>"; };
 		A848E3F621EFAF2B00461644 /* Gettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gettable.swift; sourceTree = "<group>"; };
 		A848E3F921EFB0D400461644 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A848E3FB21EFB18D00461644 /* RepositoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCoordinator.swift; sourceTree = "<group>"; };
@@ -156,8 +166,27 @@
 		9118B68821F07DB5000381A5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9118B68F21F0998D000381A5 /* UIColor+extension.swift */,
+				9118B69321F09C27000381A5 /* UILabel+Style.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9118B68C21F09909000381A5 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				9118B68D21F09976000381A5 /* ColorPallete.swift */,
+				9118B69121F09BAD000381A5 /* FontStyle.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		9118B69721F09F9A000381A5 /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				9118B69821F09FAF000381A5 /* SpecialChar.swift */,
+			);
+			path = Enumerations;
 			sourceTree = "<group>";
 		};
 		A848E3F821EFB0C300461644 /* Coordinator */ = {
@@ -225,6 +254,8 @@
 		A8E04B6821EE43BE00522B9D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9118B69721F09F9A000381A5 /* Enumerations */,
+				9118B68C21F09909000381A5 /* Style */,
 				9118B68821F07DB5000381A5 /* Extension */,
 				A848E40521EFCD1D00461644 /* Config */,
 				9118B65921EF3CAD000381A5 /* Protocol */,
@@ -370,15 +401,20 @@
 			files = (
 				A848E40221EFBC2300461644 /* MainCoordinator.swift in Sources */,
 				9118B65021EEE25A000381A5 /* GitHubItemCellTableViewCell.swift in Sources */,
+				9118B69921F09FAF000381A5 /* SpecialChar.swift in Sources */,
 				9118B68721F07A6A000381A5 /* ImageDownloaderService.swift in Sources */,
+				9118B68E21F09976000381A5 /* ColorPallete.swift in Sources */,
 				A848E3F721EFAF2B00461644 /* Gettable.swift in Sources */,
 				9118B64921EEDB8B000381A5 /* GitHubRepositoryView.swift in Sources */,
 				A848E40421EFCC7C00461644 /* GithubRepositoriesService.swift in Sources */,
 				A848E3FC21EFB18D00461644 /* RepositoriesCoordinator.swift in Sources */,
 				9118B66421F015AA000381A5 /* Serializable.swift in Sources */,
 				A848E40721EFCD2900461644 /* AppConfig.swift in Sources */,
+				9118B69221F09BAD000381A5 /* FontStyle.swift in Sources */,
 				A8E04B7221EE5A7900522B9D /* BaseViewController.swift in Sources */,
 				9118B65321EEE4B8000381A5 /* Repository.swift in Sources */,
+				9118B69021F0998D000381A5 /* UIColor+extension.swift in Sources */,
+				9118B69421F09C27000381A5 /* UILabel+Style.swift in Sources */,
 				A848E40A21EFD46300461644 /* RequestResult.swift in Sources */,
 				A848E3FA21EFB0D400461644 /* Coordinator.swift in Sources */,
 				9118B65521EEE5BE000381A5 /* Owner.swift in Sources */,

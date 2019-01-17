@@ -38,6 +38,7 @@ class RepositoriesTableView : UITableView {
         
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = UITableView.automaticDimension
+        separatorStyle = .none
         
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(refresh), for: .valueChanged)

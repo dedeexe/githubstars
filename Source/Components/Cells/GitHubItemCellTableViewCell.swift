@@ -45,6 +45,14 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
         super.setSelected(selected, animated: animated)
     }
     
+    override func prepareForReuse() {
+        repositoryView.title = ""
+        repositoryView.author = ""
+        repositoryView.stars = 0
+        repositoryView.descriptionText = ""
+        repositoryView.imageAddress = "placeholder"
+    }
+    
     func build() {
         buildComponents()
         buildConstraints()

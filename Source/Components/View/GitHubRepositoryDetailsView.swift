@@ -14,6 +14,7 @@ class GitHubRepositoryDetailsView: UIView {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
+        label.style.title()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -22,6 +23,7 @@ class GitHubRepositoryDetailsView: UIView {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
+        label.style.subtitle()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,6 +32,7 @@ class GitHubRepositoryDetailsView: UIView {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
+        label.style.description()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -38,6 +41,7 @@ class GitHubRepositoryDetailsView: UIView {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 0
+        label.style.description()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
