@@ -10,6 +10,7 @@ import UIKit
 
 protocol RepositoriesListViewDelegate : class {
     func respositoriesViewDidRequestMoreItens(_ view:RepositoriesListView)
+    func respositoriesViewDidRequestPullRefresh(_ view:RepositoriesListView)
 }
 
 class RepositoriesListView: UIView {
@@ -61,6 +62,10 @@ class RepositoriesListView: UIView {
 }
 
 extension RepositoriesListView : RepositoriesTableViewEventDelegate {
+    func repositoriesTableViewDidPullRefreshed(_ tableView: RepositoriesTableView) {
+        delegate?.respositoriesViewDidRequestPullRefresh(self)
+    }
+    
     func repositoriesTableViewDidReachEndOfList(_ tableView: RepositoriesTableView) {
         delegate?.respositoriesViewDidRequestMoreItens(self)
     }

@@ -21,6 +21,12 @@ class GithubRepositoriesService : NSObject, ServiceGettable {
         session = URLSession(configuration: .default)
     }
     
+    func reset() {
+        page = 1
+        totalCount = 0
+        totalSearched = 0
+    }
+    
     func get(completion: ((RequestResult<[Repository]>) -> Void)?) {
         
         guard let request = createRequest() else {

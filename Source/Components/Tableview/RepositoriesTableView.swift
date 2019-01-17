@@ -10,6 +10,7 @@ import UIKit
 
 protocol RepositoriesTableViewEventDelegate : class {
     func repositoriesTableViewDidReachEndOfList(_ tableView:RepositoriesTableView)
+    func repositoriesTableViewDidPullRefreshed(_ tableView:RepositoriesTableView)
 }
 
 class RepositoriesTableView : UITableView {
@@ -37,13 +38,22 @@ class RepositoriesTableView : UITableView {
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = UITableView.automaticDimension
         
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.refreshControl = refresher
+        
         register(GitHubItemCellTableViewCell.self, forCellReuseIdentifier: GitHubItemCellTableViewCell.identifier)
     }
     
     private func update() {
         DispatchQueue.main.async { [weak self] in
             self?.reloadData()
+            self?.refreshControl?.endRefreshing()
         }
+    }
+    
+    @objc func refresh(refreshControl : UIRefreshControl) {
+        eventDelegate?.repositoriesTableViewDidPullRefreshed(self)
     }
     
 }
