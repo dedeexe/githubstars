@@ -71,16 +71,15 @@ class GitHubRepositoryView: UIView, GitHubRepositoryImageViewDelegate {
     }
     
     func buildConstraints() {
-        photoView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        photoView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        photoView.rightAnchor.constraint(equalTo: detailView.leftAnchor, constant: 0).isActive = true
-        photoView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0).isActive = true
+        photoView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        photoView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        photoView.rightAnchor.constraint(equalTo: detailView.leftAnchor, constant: -8).isActive = true
+        photoView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 8).isActive = true
         photoView.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
-        detailView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        detailView.topAnchor.constraint(equalTo: photoView.topAnchor, constant: 0).isActive = true
         detailView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         detailView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0).isActive = true
-        
     }
     
     func gitHubRepositoryImageViewDelegate(_ component: GitHubRepositoryImageView, didRequestImageAt address: String) {

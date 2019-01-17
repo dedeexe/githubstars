@@ -66,9 +66,9 @@ class GitHubRepositoryDetailsView: UIView {
     
     func buildConstraints() {
         
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 8).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
 
         authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         authorLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: 0).isActive = true
@@ -81,7 +81,7 @@ class GitHubRepositoryDetailsView: UIView {
         ratingLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
         ratingLabel.leftAnchor.constraint(equalTo: descriptionLabel.leftAnchor, constant: 0).isActive = true
         ratingLabel.rightAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 0).isActive = true
-        ratingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        ratingLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
 
     }
     
