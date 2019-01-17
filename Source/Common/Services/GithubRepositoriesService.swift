@@ -12,8 +12,8 @@ class GithubRepositoriesService : NSObject, ServiceGettable {
     
     private var totalCount      = 0
     private var totalSearched   = 0
-    private var page            = 0
-    private let baseURL         = AppConfig.endpoint + "search/repositories?q=language:swift&sort=stars&per_page=100"
+    private var page            = 1
+    private let baseURL         = AppConfig.endpoint + "search/repositories?q=language:swift&sort=stars&per_page=50"
     private(set) var session    : URLSession?
     
     override init() {
@@ -68,7 +68,7 @@ class GithubRepositoriesService : NSObject, ServiceGettable {
     }
     
     private func createRequest() -> URLRequest? {
-        let urlString = baseURL + "?page=\(page)"
+        let urlString = baseURL + "&page=\(page)"
         guard let url = URL(string: urlString) else { return nil }
         
         var urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
