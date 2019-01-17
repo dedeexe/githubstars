@@ -13,7 +13,6 @@ class RepositoriesCoordinator : BaseCoordinator<RepositoriesListViewController> 
     init(navigationController : UINavigationController?) {
         let viewController = RepositoriesListScene.create()
         super.init(navigationController: navigationController, viewController: viewController)
-        viewController.delegate = self
     }
     
     override func start() {
@@ -21,10 +20,4 @@ class RepositoriesCoordinator : BaseCoordinator<RepositoriesListViewController> 
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-}
-
-extension RepositoriesCoordinator : RepositoriesViewControllerDelegate {
-    func requestNewRepositories() {
-        
-    }
 }

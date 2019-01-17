@@ -1,5 +1,5 @@
 //
-//  Owner.swift
+//  RepositoriesSearch.swift
 //  GitHubRating
 //
 //  Created by dede.exe on 16/01/19.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct Owner : Serializable {    
-    var id : Int?
-    var login : String?
-    
+struct RepositoriesSearch : Serializable {
+    var total_count : Int?
+    var items : [Repository]?
 }

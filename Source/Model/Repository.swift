@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Repository {
+struct Repository : Serializable {
     
     var name : String?
     var owner : Owner?

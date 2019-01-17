@@ -8,41 +8,71 @@
 
 import Foundation
 
-class GithubRepositoriesService : ServiceGettable {
+class GithubRepositoriesService : NSObject, ServiceGettable {
     
-    let url = AppConfig.endpoint + "/search/repositories/"
+    private var totalCount      = 0
+    private var totalSearched   = 0
+    private var page            = 0
+    private let baseURL         = AppConfig.endpoint + "search/repositories?q=language:swift&sort=stars&per_page=100"
+    private(set) var session    : URLSession?
+    
+    override init() {
+        super.init()
+        session = URLSession(configuration: .default)
+    }
     
     func get(completion: ((RequestResult<[Repository]>) -> Void)?) {
-        let result = RequestResult<[Repository]>.success(StubRep().createRepositories(quantity: 30))
-        completion?(result)
+        
+        guard let request = createRequest() else {
+            let error = NSError(domain: "Fail to create request", code: 600, userInfo: nil)
+            let result = RequestResult<[Repository]>.fail(error)
+            completion?(result)
+            return
+        }
+        
+        page += 1
+        
+        session?.dataTask(with: request) { [weak self] (data, response, error) in
+            
+            if let err = error {
+                completion?(RequestResult<[Repository]>.fail(err))
+                return
+            }
+            
+            guard let data = data, let string = String(data: data, encoding: .utf8), let httpResponse = response as? HTTPURLResponse else {
+                let err = NSError(domain: "Fail to convert data", code: 600, userInfo: nil)
+                completion?(RequestResult<[Repository]>.fail(err))
+                return
+            }
+            
+            guard case 200..<300 = httpResponse.statusCode else {
+                let err = NSError(domain: "", code: httpResponse.statusCode, userInfo: ["message": string])
+                completion?(RequestResult<[Repository]>.fail(err))
+                return
+            }
+            
+            guard let result = RepositoriesSearch(jsonString: string) else {
+                let err = NSError(domain: "Fail to parse json to object", code: 600, userInfo: nil)
+                completion?(RequestResult<[Repository]>.fail(err))
+                return
+            }
+            
+            let items = result.items ?? []
+            self?.totalSearched = (self?.totalSearched ?? 0) + items.count
+            self?.totalCount = result.total_count ?? 0
+            let response = RequestResult<[Repository]>.success(items)
+            completion?(response)
+            
+        }.resume()
+        
     }
     
-}
-
-
-class StubRep {
-    
-    func createRandomRepository() -> Repository {
-        let value = arc4random_uniform(UInt32.max)
-        let stars = Int(arc4random_uniform(UInt32(UInt16.max)))
-        let cycle = Int(arc4random_uniform(30))
+    private func createRequest() -> URLRequest? {
+        let urlString = baseURL + "?page=\(page)"
+        guard let url = URL(string: urlString) else { return nil }
         
-        var o = Owner()
-        o.id = Int(value)
-        o.login = "Owner \(value)"
-        
-        var r = Repository()
-        r.name = "Repository \(value)"
-        r.owner = o
-        r.stargazers_count = stars
-        r.description = String(repeating: "enjwk qe erewq ", count: cycle)
-        
-        return r
+        var urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        urlRequest.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        return urlRequest
     }
-    
-    func createRepositories(quantity:Int) -> [Repository] {
-        let reps = (0..<quantity).map { _ in createRandomRepository() }
-        return reps
-    }
-    
 }

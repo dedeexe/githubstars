@@ -8,13 +8,8 @@
 
 import UIKit
 
-protocol RepositoriesViewControllerDelegate : class {
-    func requestNewRepositories()
-}
-
 class RepositoriesListViewController : BaseViewController<RepositoriesListView> {
     
-    weak var delegate : RepositoriesViewControllerDelegate?
     private let service : GithubRepositoriesService
     
     private var repositories : [Repository] = []
@@ -22,6 +17,7 @@ class RepositoriesListViewController : BaseViewController<RepositoriesListView> 
     init(using view: RepositoriesListView, service:GithubRepositoriesService) {
         self.service = service
         super.init(using: view)
+        view.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,4 +46,10 @@ class RepositoriesListViewController : BaseViewController<RepositoriesListView> 
         }
     }
     
+}
+
+extension RepositoriesListViewController : RepositoriesListViewDelegate {
+    func respositoriesViewDidRequestMoreItens(_ view: RepositoriesListView) {
+        getRepositories()
+    }
 }

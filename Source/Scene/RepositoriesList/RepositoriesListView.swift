@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RepositoriesListViewDelegate {
+protocol RepositoriesListViewDelegate : class {
     func respositoriesViewDidRequestMoreItens(_ view:RepositoriesListView)
 }
 
@@ -20,6 +20,8 @@ class RepositoriesListView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    weak var delegate : RepositoriesListViewDelegate?
     
     func update(repositories:[Repository]) {
         tableView.repositories = repositories
@@ -60,6 +62,6 @@ class RepositoriesListView: UIView {
 
 extension RepositoriesListView : RepositoriesTableViewEventDelegate {
     func repositoriesTableViewDidReachEndOfList(_ tableView: RepositoriesTableView) {
-        print("Reach the end")
+        delegate?.respositoriesViewDidRequestMoreItens(self)
     }
 }
