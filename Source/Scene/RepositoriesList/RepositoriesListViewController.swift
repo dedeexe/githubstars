@@ -11,12 +11,14 @@ import UIKit
 class RepositoriesListViewController : BaseViewController<RepositoriesListView> {
     
     private let service : GithubRepositoriesService
+    private let downloader : DownloadImageService
     
     private var isPullRefresh = false
     private var repositories : [Repository] = []
     
-    init(using view: RepositoriesListView, service:GithubRepositoriesService) {
-        self.service = service
+    init(using view: RepositoriesListView, githubService:GithubRepositoriesService, imageService:DownloadImageService) {
+        self.service = githubService
+        self.downloader = imageService
         super.init(using: view)
         view.delegate = self
     }
@@ -74,6 +76,17 @@ class RepositoriesListViewController : BaseViewController<RepositoriesListView> 
 }
 
 extension RepositoriesListViewController : RepositoriesListViewDelegate {
+    func respositoriesView(_ view: RepositoriesListView, didRequestImageAt address: String, for component: GitHubRepositoryImageView) {
+        downloader.get(imageUrl: address) { response in
+            switch response {
+            case .success(let image):
+                component.set(image: image)
+            default:
+                component.set(image: UIImage(named:"placeholder"))
+            }
+        }
+    }
+    
     func respositoriesViewDidRequestPullRefresh(_ view: RepositoriesListView) {
         isPullRefresh = true
         service.reset()

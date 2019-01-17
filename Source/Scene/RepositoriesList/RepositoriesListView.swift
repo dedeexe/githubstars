@@ -11,6 +11,7 @@ import UIKit
 protocol RepositoriesListViewDelegate : class {
     func respositoriesViewDidRequestMoreItens(_ view:RepositoriesListView)
     func respositoriesViewDidRequestPullRefresh(_ view:RepositoriesListView)
+    func respositoriesView(_ view:RepositoriesListView, didRequestImageAt address:String, for component:GitHubRepositoryImageView)
 }
 
 class RepositoriesListView: UIView {
@@ -62,6 +63,10 @@ class RepositoriesListView: UIView {
 }
 
 extension RepositoriesListView : RepositoriesTableViewEventDelegate {
+    func repositoriesTableView(_ tableView: RepositoriesTableView, didRequestImageAt address: String, for component: GitHubRepositoryImageView) {
+        delegate?.respositoriesView(self, didRequestImageAt: address, for: component)
+    }
+    
     func repositoriesTableViewDidPullRefreshed(_ tableView: RepositoriesTableView) {
         delegate?.respositoriesViewDidRequestPullRefresh(self)
     }

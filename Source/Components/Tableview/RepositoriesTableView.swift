@@ -11,6 +11,7 @@ import UIKit
 protocol RepositoriesTableViewEventDelegate : class {
     func repositoriesTableViewDidReachEndOfList(_ tableView:RepositoriesTableView)
     func repositoriesTableViewDidPullRefreshed(_ tableView:RepositoriesTableView)
+    func repositoriesTableView(_ tableView:RepositoriesTableView, didRequestImageAt address:String, for component:GitHubRepositoryImageView)
 }
 
 class RepositoriesTableView : UITableView {
@@ -73,6 +74,7 @@ extension RepositoriesTableView : UITableViewDataSource {
             fatalError("No cell found: \(GitHubItemCellTableViewCell.identifier)")
         }
         
+        cell.delegate = self
         cell.repository = repositories[indexPath.row]
         return cell
     }
@@ -93,5 +95,11 @@ extension RepositoriesTableView : UITableViewDelegate {
         if indexPath.row == repositories.count - offset {
             eventDelegate?.repositoriesTableViewDidReachEndOfList(self)
         }
+    }
+}
+
+extension RepositoriesTableView : GitHubItemCellTableViewCellDelegate {
+    func gitHubItemCellTableViewCell(_ cell: GitHubItemCellTableViewCell, didRequestImageAt address: String, for component: GitHubRepositoryImageView) {
+        eventDelegate?.repositoriesTableView(self, didRequestImageAt: address, for: component)
     }
 }

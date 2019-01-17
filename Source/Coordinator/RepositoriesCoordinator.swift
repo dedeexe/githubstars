@@ -11,8 +11,11 @@ import UIKit
 class RepositoriesCoordinator : BaseCoordinator<RepositoriesListViewController> {
     
     init(navigationController : UINavigationController?) {
-        let viewController = RepositoriesListScene.create()
-        super.init(navigationController: navigationController, viewController: viewController)
+        let view = RepositoriesListView()
+        let service = GithubRepositoriesService()
+        let downloader = DownloadImageService()
+        let controller = RepositoriesListViewController(using: view, githubService: service, imageService: downloader)
+        super.init(navigationController: navigationController, viewController: controller)
     }
     
     override func start() {

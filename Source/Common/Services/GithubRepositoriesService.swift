@@ -14,12 +14,7 @@ class GithubRepositoriesService : NSObject, ServiceGettable {
     private var totalSearched   = 0
     private var page            = 1
     private let baseURL         = AppConfig.endpoint + "search/repositories?q=language:swift&sort=stars&per_page=50"
-    private(set) var session    : URLSession?
-    
-    override init() {
-        super.init()
-        session = URLSession(configuration: .default)
-    }
+    private(set) var session    = URLSession.shared
     
     func reset() {
         page = 1
@@ -38,7 +33,7 @@ class GithubRepositoriesService : NSObject, ServiceGettable {
         
         page += 1
         
-        session?.dataTask(with: request) { [weak self] (data, response, error) in
+        session.dataTask(with: request) { [weak self] (data, response, error) in
             
             if let err = error {
                 completion?(RequestResult<[Repository]>.fail(err))

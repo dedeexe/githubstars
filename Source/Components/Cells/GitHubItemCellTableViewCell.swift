@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol GitHubItemCellTableViewCellDelegate : class {
+    func gitHubItemCellTableViewCell(_ cell:GitHubItemCellTableViewCell, didRequestImageAt address:String, for component:GitHubRepositoryImageView)
+}
+
 class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     
     private lazy var repositoryView : GitHubRepositoryView = {
@@ -24,6 +28,8 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     var repository : Repository? = nil {
         didSet { update(repository: repository) }
     }
+    
+    weak var delegate : GitHubItemCellTableViewCellDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -46,6 +52,7 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
     
     func buildComponents() {
         contentView.addSubview(repositoryView)
+        repositoryView.delegate = self
     }
     
     func buildConstraints() {
@@ -62,6 +69,13 @@ class GitHubItemCellTableViewCell: UITableViewCell, Identifiable {
         repositoryView.author = repository?.owner?.login ?? ""
         repositoryView.stars = repository?.stargazers_count ?? 0
         repositoryView.descriptionText = repository?.description ?? ""
+        repositoryView.imageAddress = repository?.owner?.avatar_url ?? ""
     }
 
+}
+
+extension GitHubItemCellTableViewCell: GitHubRepositoryViewDelegate {
+    func gitHubRepositoryView(_ component: GitHubRepositoryImageView, didRequestImageAt address: String) {
+        delegate?.gitHubItemCellTableViewCell(self, didRequestImageAt: address, for: component)
+    }
 }
